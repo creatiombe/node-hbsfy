@@ -69,6 +69,7 @@ function hbsfy(file, opts) {
     // Compile only with the runtime dependency.
     var compiled = "// hbsfy compiled Handlebars template\n";
     compiled += "var HandlebarsCompiler = " + compiler + ";\n";
+    compiled += "Swag.registerHelpers(HandlebarsCompiler);";
     compiled += "module.exports = HandlebarsCompiler.template(" + js.toString() + ");\n";
     this.queue(compiled);
     this.queue(null);
@@ -81,6 +82,7 @@ hbsfy.configure = function(rootOpts) {
     return hbsfy(file, xtend({}, rootOpts, opts));
   };
 };
+
 
 module.exports = hbsfy;
 
